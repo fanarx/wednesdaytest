@@ -1,18 +1,75 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PlaceInput from './PlaceInput';
+import UserInfo from './UserInfo';
+import ConfirmPage from './ConfirmPage';
 
 class App extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      step: 1,
+      userDetails: {
+        location: '',
+        email: '',
+        mobile: ''
+      }
+    }
+  }
+
+  handleLocation = (location) => {
+    console.log('handleLocation', location);
+    this.setState({
+      step: 2,
+      userDetails: {
+        ...this.state.userDetails,
+        location,
+      }
+    });
+  }
+
+  updateUserDetails = (datails) => {
+    this.setState({
+      userDetails: {
+        ...this.state.userDetails,
+        ...datails
+      }
+    })
+  }
+
+  handleStep = (stepNum) => {
+    this.setState({
+      step: stepNum
+    })
+  }
+
+
   render() {
+    console.log('state in App', this.state);
+    const { step } = this.state;
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-         edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="place-box">
+        {step === 1 &&
+          <div className="place-container">
+            <h2 className="place-title">STEP 1</h2>
+            <PlaceInput
+             onNext={this.handleLocation}
+            />         
+          </div>
+        }
+        {step === 2 &&
+          <UserInfo
+           onChange={this.updateUserDetails} 
+           onBack={() => this.handleStep(1)}
+           onNext={() => this.handleStep(3)}
+          />
+        }
+        {step === 3 &&
+          <ConfirmPage 
+            onBack={() => this.handleStep(2)}
+            details={this.state.userDetails}
+          />
+        }
       </div>
     );
   }

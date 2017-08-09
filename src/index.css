@@ -3,3 +3,54 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.place-title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.place-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.place-container {
+  width: 50%;
+}
+
+.place-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.place-button {
+  background: #6b86af;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  color: #fff;
+  width: 60px;
+  align-self: flex-end;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.place-button:hover {
+  background: #546175;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+button:disabled:hover,
+button[disabled]:hover{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
